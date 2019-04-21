@@ -23,3 +23,7 @@ This will create a subdirectory named ```compiled```, with the executables in ``
 * mtools is not being compiled with libiconv support. This'd improve handling of character sets, but there's no mingw-based libiconv, and the existing [win_iconv project](https://github.com/win-iconv/win-iconv) doesn't support langinfo.h which is needed by mtool's use of libiconv.
 * No tests or other CI. Right now it's all semi-manual. 
 * There's no work done to ensure this Docker container will function forever. Once Ubuntu drops support for 18.04 the apt-get it runs will fail and this container will expire.
+
+## License
+
+Much like mtools, it's licensed under [GPL v3](https://www.gnu.org/licenses/gpl-3.0.en.html).
