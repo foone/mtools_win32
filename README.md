@@ -11,9 +11,11 @@ from being generated with the right extensions.
 
 ## Usage
 
+```
 $ docker build -t mtools . && docker run -v $(realpath compiled):/compiled -it mtools:latest
+```
 
-This will create a subdirectory named compiled, with the executables in compiled/bin
+This will create a subdirectory named ```compiled```, with the executables in ```compiled/bin```
 
 ## Future improvements
 
