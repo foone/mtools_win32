@@ -1,0 +1,3 @@
+[submodule "win-iconv"]
+	path = win-iconv
+	url = https://github.com/win-iconv/win-iconv.git

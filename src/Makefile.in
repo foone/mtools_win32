@@ -135,9 +135,12 @@ xdf_io.c mkmanifest.c
 
 SCRIPTS = mcheck mxtar uz tgz mcomp amuFormat.sh
 
-LINKS=mattrib mcat mcd mclasserase mcopy mdel mdeltree mdir mdu mformat minfo \
-mlabel mmd mmount mmove mpartition mrd mren mtype mtoolstest mshortname \
-mshowfat mbadblocks mzip
+LINKS=mattrib@EXEEXT@ mcat@EXEEXT@ mcd@EXEEXT@ mclasserase@EXEEXT@ \
+mcopy@EXEEXT@ mdel@EXEEXT@ mdeltree@EXEEXT@ mdir@EXEEXT@ mdu@EXEEXT@ \
+mformat@EXEEXT@ minfo@EXEEXT@ mlabel@EXEEXT@ mmd@EXEEXT@ mmount@EXEEXT@ \
+mmove@EXEEXT@ mpartition@EXEEXT@ mrd@EXEEXT@ mren@EXEEXT@ mtype@EXEEXT@ \
+mtoolstest@EXEEXT@ mshortname@EXEEXT@ mshowfat@EXEEXT@ mbadblocks@EXEEXT@ \
+mzip@EXEEXT@
 
 X_CFLAGS = @X_CFLAGS@
 X_LIBS = @X_LIBS@
@@ -150,7 +153,7 @@ ALLLIBS   = $(USERLDLIBS) $(MACHDEPLIBS) $(SHLIB) $(LIBS)
 X_LDFLAGS = $(X_EXTRA_LIBS) $(X_LIBS) -lXau -lX11 $(LIBS)
 X_CCFLAGS = $(X_CFLAGS) $(CFLAGS)
 
-all:    mtools $(LINKS) mkmanifest @FLOPPYD@ mtools.1 mtools.5
+all:    mtools@EXEEXT@ $(LINKS) mkmanifest @FLOPPYD@ mtools.1 mtools.5
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
@@ -158,7 +161,7 @@ all:    mtools $(LINKS) mkmanifest @FLOPPYD@ mtools.1 mtools.5
 #%.o: %.cpp
 #	$(CXX) $(CXXFLAGS) -c $<
 
-mtools: $(OBJS1)
+mtools@EXEEXT@: $(OBJS1)
 	$(LINK) $(OBJS1) -o $@ $(ALLLIBS)
 
 mkmanifest: $(OBJS2)
@@ -173,14 +176,14 @@ floppyd_installtest: $(OBJS4)
 	$(LINK) $(OBJS4) -o $@ $(ALLLIBS)
 
 
-$(LINKS): mtools
-	rm -f $@ && $(LN_S) mtools $@
+$(LINKS): mtools@EXEEXT@
+	rm -f $@ && $(LN_S) mtools@EXEEXT@ $@
 
 mostlyclean:
 	-rm -f *~ *.orig *.o a.out core 2>/dev/null
 
 clean:	mostlyclean
-	-rm -f mtools $(LINKS) floppyd floppyd_installtest mkmanifest *.info* *.dvi *.html 2>/dev/null
+	-rm -f mtools@EXEEXT@ $(LINKS) floppyd floppyd_installtest mkmanifest *.info* *.dvi *.html 2>/dev/null
 
 
 texclean:
@@ -237,7 +240,7 @@ install-info: info
 uninstall-info:
 	cd $(DESTDIR)$(infodir) && rm -f mtools.info*
 
-install:	$(DESTDIR)$(bindir)/mtools @BINFLOPPYD@ install-man install-links \
+install:	$(DESTDIR)$(bindir)/mtools@EXEEXT@ @BINFLOPPYD@ install-man install-links \
 		$(DESTDIR)$(bindir)/mkmanifest install-scripts install-info
 
 uninstall:	uninstall-bin uninstall-man uninstall-links \
@@ -256,9 +259,9 @@ $(DESTDIR)$(bindir)/floppyd_installtest: floppyd_installtest
 	$(top_srcdir)/mkinstalldirs $(DESTDIR)$(bindir)
 	$(INSTALL_PROGRAM) floppyd_installtest $(DESTDIR)$(bindir)/floppyd_installtest
 
-$(DESTDIR)$(bindir)/mtools: mtools
+$(DESTDIR)$(bindir)/mtools@EXEEXT@: mtools@EXEEXT@
 	$(top_srcdir)/mkinstalldirs $(DESTDIR)$(bindir)
-	$(INSTALL_PROGRAM) mtools $(DESTDIR)$(bindir)/mtools
+	$(INSTALL_PROGRAM) mtools@EXEEXT@ $(DESTDIR)$(bindir)/mtools@EXEEXT@
 
 $(DESTDIR)$(bindir)/mkmanifest: mkmanifest
 	$(top_srcdir)/mkinstalldirs $(DESTDIR)$(bindir)
@@ -267,15 +270,15 @@ $(DESTDIR)$(bindir)/mkmanifest: mkmanifest
 #$(ETCDIR)/mtools: mtools.etc
 #	cp mtools.etc $(ETCDIR)/mtools
 
-install-links: $(DESTDIR)$(bindir)/mtools
+install-links: $(DESTDIR)$(bindir)/mtools@EXEEXT@
 	@for j in $(LINKS); do \
 		rm -f $(DESTDIR)$(bindir)/$$j ; \
-		$(LN_S) mtools $(DESTDIR)$(bindir)/$$j ; \
+		$(LN_S) mtools@EXEEXT@ $(DESTDIR)$(bindir)/$$j ; \
 		echo $(DESTDIR)$(bindir)/$$j ; \
 	done
 
 ## "z" is the older version of "gz"; the name is just *too* short
-install-scripts: $(DESTDIR)$(bindir)/mtools
+install-scripts: $(DESTDIR)$(bindir)/mtools@EXEEXT@
 	@$(top_srcdir)/mkinstalldirs $(DESTDIR)$(bindir)
 	@for j in $(SCRIPTS) ; do \
 		$(INSTALL_PROGRAM) $(srcdir)/scripts/$$j $(DESTDIR)$(bindir)/$$j ; \
@@ -297,7 +300,7 @@ install-man:
 	done
 
 uninstall-bin:
-	@for j in mtools mkmanifest; do \
+	@for j in mtools@EXEEXT@ mkmanifest; do \
 		rm -f $(DESTDIR)$(bindir)/$$j ; \
 		echo $(DESTDIR)$(bindir)/$$j ; \
 	done
