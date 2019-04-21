@@ -14,6 +14,6 @@ WORKDIR /build/mtools
 # Don't ask.
 RUN rm /bin/ln
 
-CMD rm -rf /compiled/* && ./configure -enable-xdf --host=i686-w64-mingw32 --prefix=/compiled && make install
+CMD rm -rf /compiled/* && ./configure -enable-xdf --host=i686-w64-mingw32 --prefix=/compiled && make install && strip /compiled/bin/*.exe
 
 #RUN
